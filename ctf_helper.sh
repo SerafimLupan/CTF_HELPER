@@ -49,18 +49,18 @@ while true; do
 
     case $opt in
         1) run_web_pentest ;;
-        2) ;;
-        3) ;;
-        4) ;;
-        5) ;;
-        6) ;;
-        7) ;;
-        8) ;;
-        9) ;;
-        10) ;;
-        11) ;;
-        12) ;;
-        13) ;;
+        2) run_network_services ;;
+        3) run_linux_hardening ;;
+        4) run_reversing ;;
+        5) run_crypto ;;
+        6) run_blockchain ;;
+        7) run_file_analyzer ;;
+        8) run_stego ;;
+        9) run_binary_exploit ;;
+        10) run_windows_hardening ;;
+        11) run_mobile_pentest ;;
+        12) run_ai_security ;;
+        13) run_generic_methodologies ;;
         0) echo -e "${C6}Exiting. Happy Hacking!${NC}"; exit 0 ;;
         *) echo -e "${C1}Category logic not yet implemented.${NC}"; sleep 1 ;;
     esac
