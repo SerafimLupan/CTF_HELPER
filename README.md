@@ -19,8 +19,7 @@
 ---
 
 ## 📂 Project Structure
-
-    ```text
+    
     CTF_HELPER/
     ├── ctf_helper.sh             # Main entry point & Menu system
     ├── requirements.sh           # Dependency installer
