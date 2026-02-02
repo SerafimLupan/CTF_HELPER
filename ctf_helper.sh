@@ -21,7 +21,7 @@ print_banner() {
     echo -e "${C6}\`Mb.     ,'      MM        MM                 MM      MM    MM     ,M   MM     ,M ${C6} MM              ${NC}${C6}  MM     ,M   MM     \`Mb.${NC}"
     echo -e "${C6} \`\"bmmmd'      .JMML.    .JMML.   mmmmmmm   .JMML.  .JMML..JMMmmmmMMM .JMMmmmmMMM ${C6} MM              ${NC}${C6} .JMMmmmmMMM .JMML.  .JMM.${NC}"
     echo -e ""
-    echo -e "                   | by Lupan \"Tirasp0l\" Serafim | more info: serafimlupan.com |"
+    echo -e "        Modular Framework v1.0.0  | by Lupan \"Tirasp0l\" Serafim | more info: serafimlupan.com |"
     echo -e "--------------------------------------------------------------------------------------------------------\n"
 }
 
