@@ -25,6 +25,14 @@ print_banner() {
     echo -e "--------------------------------------------------------------------------------------------------------\n"
 }
 
+# --- Import All Modules Dynamically ---
+# This looks for any .sh file in /modules and loads it
+if [ -d "./modules" ]; then
+    for module in ./modules/*.sh; do
+        source "$module"
+    done
+fi
+
 # --- Main Menu ---
 while true; do
     print_banner
@@ -40,12 +48,19 @@ while true; do
     read opt
 
     case $opt in
-        1) # logic for pentesting-web
-           ;;
-        3) # logic for linux-hardening
-           ;;
-        7) # file analyzer
-           ;;
+        1) run_web_pentest ;;
+        2) ;;
+        3) ;;
+        4) ;;
+        5) ;;
+        6) ;;
+        7) ;;
+        8) ;;
+        9) ;;
+        10) ;;
+        11) ;;
+        12) ;;
+        13) ;;
         0) echo -e "${C6}Exiting. Happy Hacking!${NC}"; exit 0 ;;
         *) echo -e "${C1}Category logic not yet implemented.${NC}"; sleep 1 ;;
     esac
