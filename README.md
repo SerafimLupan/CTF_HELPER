@@ -27,19 +27,19 @@
     ├── LICENSE                   # MIT License
     ├── README.md                 # Documentation
     └── modules/                  # Specialized attack modules
-        ├── ai_security.sh
-        ├── binary_exploit.sh
-        ├── blockchain.sh
-        ├── crypto.sh
-        ├── file_analyzer.sh
-        ├── generic_methodologies.sh
-        ├── linux_hardening.sh
-        ├── mobile_pentest.sh
-        ├── network_services.sh
-        ├── reversing.sh
-        ├── stego.sh
-        ├── web_pentest.sh
-        └── windows_hardening.sh                          `
+        ├── ai_security.sh            # AI Security: Focuses on LLM vulnerabilities, Prompt Injection, and Model Safety.
+        ├── binary_exploit.sh         # Binary Exploitation: Tools for buffer overflows, ROP chains, and memory protection bypass.
+        ├── blockchain.sh             # Blockchain: Smart contract auditing and interaction with EVM-based networks.
+        ├── crypto.sh                 # Cryptography: Hash identification, cracking, and common cipher decryption.
+        ├── file_analyzer.sh          # File Analyzer: Deep inspection of file signatures, magic bytes, and metadata.
+        ├── generic_methodologies.sh  # Generic Methodologies: OSINT, Cloud (AWS/Azure) basics, and general CTF strategy.
+        ├── linux_hardening.sh        # Linux Hardening: Local enumeration for Privilege Escalation (SUID, Caps, Cron).
+        ├── mobile_pentest.sh         # Mobile Pentest: Android APK and iOS IPA static and dynamic analysis.
+        ├── network_services.sh       # Network Services: Protocol-specific enumeration (SMB, FTP, SNMP, etc.).
+        ├── reversing.sh              # Reversing: Static and dynamic analysis of binaries (ELF/EXE).
+        ├── stego.sh                  # Steganography: Finding hidden data in images, audio, and video files.
+        ├── web_pentest.sh            # Web Pentest: Fuzzing, CMS identification, and web vulnerability scanning.
+        └── windows_hardening.sh      # Windows Hardening: Local PrivEsc vectors and Active Directory enumeration.
 
 ---
 
