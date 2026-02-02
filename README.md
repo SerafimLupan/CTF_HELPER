@@ -1,4 +1,4 @@
-# CTF_HELPER 🚩
+# CTF_HELPER 🚩 `v1.0.0`
 
 **A modular, HackTricks-inspired automation suite for CTF players and Pentesters.**
 
