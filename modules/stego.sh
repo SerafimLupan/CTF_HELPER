@@ -1,73 +1,43 @@
 #!/bin/bash
-# Module: Steganography (HackTricks Methodology)
-# Based on: https://book.hacktricks.xyz/crypto/stegano-introduction
+# CTF_HELPER - Steganography Module v2.0
+# Based on HackTricks Stego Methodology
 
-function run_stego() {
-    print_banner
-    echo -e "${C6}[STEGANOGRAPHY MODULE]${NC}"
-    echo -e "Image & Media Analysis Tools"
-    echo -e "----------------------------------------------------------------------------"
-    echo -e "1) 🖼️   Image Layers Analysis (LSB/Color Planes)"
-    echo -e "2) 🤐  Steghide Extract (Check for hidden data with/without pass)"
-    echo -e "3) 🕵️   Check for Hidden EOF Data (Strings at end of file)"
-    echo -e "4) 📊  Bit Plane Complexity (stegoveritas/zsteg check)"
-    echo -e "5) 🔊  Audio Steganography (Spectrogram reminder)"
-    echo -e "6) 🛠️   Fix Corrupt File Headers (PNG/JPG Magic Bytes)"
-    echo -e "0) ↩️   Return to Main Menu"
+source ./ctf_helper.sh
 
-    echo -ne "\n${C5}Stego Selection: ${NC}"
-    read sopt
+echo -e "${C6}
+ ██████╗████████╗███████╗ ██████╗  ██████╗ 
+██╔════╝╚══██╔══╝██╔════╝██╔════╝ ██╔═══██╗
+╚█████╗    ██║   █████╗  ██║  ███╗ ██║   ██║
+ ╚═══██╗   ██║   ██╔══╝  ██║   ██║ ██║   ██║
+██████╔╝   ██║   ███████╗╚██████╔╝ ╚██████╔╝
+╚═════╝    ╚═╝   ╚══════╝ ╚═════╝   ╚═════╝ 
+${NC}"
 
-    case $sopt in
-        1)
-            read -p "Path to image: " img
-            if [ -f "$img" ]; then
-                echo -e "[*] Opening StegSolve (Manual Analysis)..."
-                # StegSolve is a JAR file, assuming it's in a standard path or aliased
-                java -jar /opt/stegsolve.jar "$img" 2>/dev/null || echo -e "${C1}[!] StegSolve not found in /opt/. Please check path.${NC}"
-            fi
-            ;;
-        2)
-            read -p "Path to file: " f
-            read -p "Enter passphrase (leave empty for none): " pass
-            if [ -f "$f" ]; then
-                steghide extract -sf "$f" -p "$pass"
-            fi
-            ;;
-        3)
-            read -p "Path to file: " f
-            if [ -f "$f" ]; then
-                echo -e "[*] Checking for data after File Termination..."
-                # Extracting trailing data after PNG/JPG EOF
-                binwalk "$f"
-                echo -e "\n[*] Strings at EOF (last 50 lines):"
-                tail -n 50 "$f" | strings
-            fi
-            ;;
-        4)
-            read -p "Path to file: " f
-            if [ -f "$f" ]; then
-                echo -e "[*] Running zsteg (LSB detection for PNG/BMP)..."
-                zsteg -a "$f" 2>/dev/null || echo "zsteg not found. Install with: gem install zsteg"
-            fi
-            ;;
-        5)
-            echo -e "\n${C4}--- Audio Stego Tip ---${NC}"
-            echo -e "1. Open file in Audacity."
-            echo -e "2. Switch to 'Spectrogram' view."
-            echo -e "3. Look for text or patterns in high/low frequencies."
-            ;;
-        6)
-            read -p "Path to file: " f
-            echo -e "[*] Current Header (xxd):"
-            head -c 8 "$f" | xxd
-            echo -e "\n${C4}Expected Headers:${NC}"
-            echo -e "PNG: 89 50 4E 47 0D 0A 1A 0A"
-            echo -e "JPG: FF D8 FF E0"
-            echo -e "GIF: 47 49 46 38 39 61"
-            ;;
-        0) return ;;
-        *) echo -e "${C1}Invalid selection.${NC}" ; sleep 1 ;;
-    esac
-    read -p "Press Enter to return..."
-}
+echo -e "${C4}[REFERENCE] https://book.hacktricks.xyz/stego/stego${NC}"
+echo -e "------------------------------------------------------------------"
+
+echo -e "${C1}Select Steganography Category:${NC}"
+echo "1) 📋 General Triage (Workflow, Strings, Binwalk, Carving)"
+echo "2) 🖼️  Image Stego (LSB, Metadata, Chunks, GIF/APNG)"
+echo "3) 🎵 Audio Stego (Spectrogram, LSB, DTMF, FSK)"
+echo "4) 📄 Document Stego (PDF, Office/OOXML ZIP extraction)"
+echo "5) 🔡 Text Stego (Unicode, Zero-Width, Whitespace)"
+echo "6) 🦠 Malware/Delivery Stego (Marker-delimited payloads)"
+echo "0) 🔙 Return to Main Menu"
+
+echo -en "\n${C3}stego_helper > ${NC}"
+read stego_opt
+
+case $stego_opt in
+    1) ./modules/stego/workflow.sh ;;
+    2) ./modules/stego/images.sh ;;
+    3) ./modules/stego/audio.sh ;;
+    4) ./modules/stego/documents.sh ;;
+    5) ./modules/stego/text.sh ;;
+    6) ./modules/stego/malware_stego.sh ;;
+    0) return ;;
+    *) echo -e "${C2}[!] Invalid option.${NC}" ; sleep 1 ; ./modules/stego.sh ;;
+esac
+
+# Return to menu
+./modules/stego.sh
