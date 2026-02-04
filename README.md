@@ -1,4 +1,4 @@
-# CTF_HELPER 🚩 `v1.0.0`
+# CTF_HELPER 🚩 `v2.0.0`
 
 **A modular, HackTricks-inspired automation suite for CTF players and Pentesters.**
 
@@ -10,7 +10,7 @@
 
 ## ✨ Features
 
-- **Modular Design:** 13 dedicated modules (Web, Network, Binary, Blockchain, etc.) for easy expansion.
+- **Massive Web Suite:** 50+ specialized attack vectors covering Server-Side, Client-Side, and Modern Web logic.
 - **HackTricks Integrated:** Every module follows step-by-step checklists from [HackTricks.xyz](https://book.hacktricks.xyz/).
 - **Native & Advanced Tools:** Combines built-in Linux commands (`strings`, `xxd`, `find`) with industry-standard tools (`nmap`, `gobuster`, `steghide`, `slither`).
 - **Matrix-style UI:** A clean, green-themed interface with a custom ASCII banner.
@@ -27,6 +27,14 @@
     ├── LICENSE                   # MIT License
     ├── README.md                 # Documentation
     └── modules/                  # Specialized attack modules
+        ├── web/                  # 🌐 WEB VULNERABILITIES (50+ Vectors)
+        │   ├── auth_*.sh             # 2FA, JWT, OAuth, SAML, Login/Reset Bypass
+        │   ├── client_*.sh           # XSS, CSRF, CORS, PostMessage, Clickjacking
+        │   ├── injection_*.sh        # SQLi, NoSQL, Command, LDAP, XPath, Unicode
+        │   ├── logic_*.sh            # IDOR, Race Condition, Rate Limit, Price Tampering
+        │   ├── server_*.sh           # SSRF, XXE, SSTI, LFI/RFI, Deserialization, Smuggling
+        │   ├── modern_*.sh           # WebSockets, gRPC, dApps, ReDoS, UUIDs
+        │   └── methodology_*.sh      # Recon flow and PoC templates
         ├── ai_security.sh            # AI Security: Focuses on LLM vulnerabilities, Prompt Injection, and Model Safety.
         ├── binary_exploit.sh         # Binary Exploitation: Tools for buffer overflows, ROP chains, and memory protection bypass.
         ├── blockchain.sh             # Blockchain: Smart contract auditing and interaction with EVM-based networks.
