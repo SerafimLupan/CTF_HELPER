@@ -1,56 +1,51 @@
 #!/bin/bash
-# Module: Cryptography (HackTricks Methodology)
+# CTF_HELPER - Cryptography Module v2.0
+# Based on HackTricks Cryptography Methodology
 
-function run_crypto() {
-    print_banner
-    echo -e "${C6}[CRYPTOGRAPHY MODULE]${NC}"
-    echo -e "Based on: https://book.hacktricks.xyz/crypto/cryptography-introduction"
-    echo -e "----------------------------------------------------------------------------"
-    echo -e "1) 🧠  Identify Hash Type (hash-identifier)"
-    echo -e "2) 🔨  Brute-force Hash (John the Ripper)"
-    echo -e "3) 🔓  Decrypt Base64 / Hex / Rot13 (Quick)"
-    echo -e "4) 🤐  Zip/Archive Password Cracking (fcrackzip)"
-    echo -e "5) 🔑  SSH Key Permissions & Passphrase Crack"
-    echo -e "6) 📜  Certificate Analysis (OpenSSL)"
-    echo -e "0) ↩️   Return to Main Menu"
+source ./ctf_helper.sh # Pentru culori și banner, dacă sunt exportate
 
-    echo -ne "\n${C5}Crypto Selection: ${NC}"
-    read copt
+echo -e "${C6}
+██████╗██████╗ ██╗   ██╗██████╗ ████████╗ ██████╗ 
+██╔════╝██╔══██╗╚██╗ ██╔╝██╔══██╗╚══██╔══╝██╔═══██╗
+██║     ██████╔╝ ╚████╔╝ ██████╔╝   ██║   ██║   ██║
+██║     ██╔══██╗  ╚██╔╝  ██╔═══╝    ██║   ██║   ██║
+╚██████╗██║  ██║   ██║   ██║        ██║   ╚██████╔╝
+ ╚═════╝╚═╝  ╚═╝   ╚═╝   ╚═╝        ╚═╝    ╚═════╝ 
+${NC}"
 
-    case $copt in
-        1)
-            read -p "Enter Hash: " hash_val
-            echo "$hash_val" > /tmp/hash.txt
-            hash-identifier <<<$hash_val
-            ;;
-        2)
-            read -p "Path to Hash file: " hfile
-            read -p "Format (ex: md5, sha1, nt): " hfmt
-            john --format=$hfmt --wordlist=/usr/share/wordlists/rockyou.txt "$hfile"
-            ;;
-        3)
-            read -p "Enter String: " s
-            echo -e "\n[*] Base64: $(echo $s | base64 -d 2>/dev/null || echo 'N/A')"
-            echo -e "[*] Hex:    $(echo $s | xxd -r -p 2>/dev/null || echo 'N/A')"
-            echo -e "[*] Rot13:  $(echo $s | tr 'A-Za-z' 'N-ZA-Mn-za-m')"
-            ;;
-        4)
-            read -p "Path to Zip: " zfile
-            fcrackzip -u -d -p /usr/share/wordlists/rockyou.txt "$zfile"
-            ;;
-        5)
-            read -p "Path to SSH Key: " kfile
-            chmod 600 "$kfile"
-            echo -e "[*] Permissions fixed (600). Attempting to extract hash for John..."
-            ssh2john "$kfile" > /tmp/ssh.hash 2>/dev/null
-            john --wordlist=/usr/share/wordlists/rockyou.txt /tmp/ssh.hash
-            ;;
-        6)
-            read -p "Path to Certificate (.crt/.pem): " cert
-            openssl x509 -in "$cert" -text -noout
-            ;;
-        0) return ;;
-        *) echo -e "${C1}Invalid selection.${NC}" ; sleep 1 ;;
-    esac
-    read -p "Press Enter to return..."
-}
+echo -e "${C4}[REFERENCE] https://book.hacktricks.xyz/crypto/crypto-attacks${NC}"
+echo -e "------------------------------------------------------------------"
+
+echo -e "${C1}Select Cryptography Category:${NC}"
+echo "1) 🔍 Triage & Identification (HashID, CipherID, CyberChef Magic)"
+echo "2) 🏛️  Classical Ciphers & Encodings (ROT, Vigenere, Base-Layers)"
+echo "3) 🔑 Symmetric Crypto (AES Modes, Padding Oracle, Bit-Flipping, XOR)"
+echo "4) 📜 Public-Key Crypto (RSA, ECC, Lattices/SageMath)"
+echo "5) ⚡ Hashes & MACs (Cracking, Length Extension, HMAC)"
+echo "6) 🛠️  Crypto in Malware (S-Box Search, RC4 Loops, API Recognition)"
+echo "7) 📦 Misc (Esoteric Langs, Shamir, OpenSSL Salted)"
+echo "0) 🔙 Return to Main Menu"
+
+echo -en "\n${C3}crypto_helper > ${NC}"
+read crypto_opt
+
+case $crypto_opt in
+    1)
+        # Identificare rapidă conform HackTricks Triage Checklist
+        read -p "Enter secret/blob: " secret
+        echo -e "${C2}[*] Identifying...${NC}"
+        hashid -m -j "$secret"
+        echo -e "${C3}[Tip] Check if it's High Entropy (Encrypted) or Structured (Encoded).${NC}"
+        ;;
+    2) ./modules/crypto/classical_ciphers.sh ;;
+    3) ./modules/crypto/symmetric_attacks.sh ;;
+    4) ./modules/crypto/public_key_rsa.sh ;;
+    5) ./modules/crypto/hash_cracking.sh ;;
+    6) ./modules/crypto/malware_recon.sh ;;
+    7) ./modules/crypto/misc_crypto.sh ;;
+    0) return ;;
+    *) echo -e "${C2}[!] Invalid option.${NC}" ; sleep 1 ; ./modules/crypto.sh ;;
+esac
+
+# Revenire automată la meniul crypto după execuție
+./modules/crypto.sh
