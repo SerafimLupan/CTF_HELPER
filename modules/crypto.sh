@@ -1,8 +1,9 @@
 #!/bin/bash
 # CTF_HELPER - Cryptography Module v2.0
-# Based on HackTricks Cryptography Methodology
+# Guiding Principle: HackTricks Crypto Methodology
 
-source ./ctf_helper.sh # Pentru culori și banner, dacă sunt exportate
+# Load colors and banner functions from main script
+source ./ctf_helper.sh 
 
 echo -e "${C6}
 ██████╗██████╗ ██╗   ██╗██████╗ ████████╗ ██████╗ 
@@ -31,21 +32,47 @@ read crypto_opt
 
 case $crypto_opt in
     1)
-        # Identificare rapidă conform HackTricks Triage Checklist
+        # Fast identification based on HackTricks Triage Checklist
+        # Helps distinguish between Encoding, Encryption, Hash, or Signature
         read -p "Enter secret/blob: " secret
         echo -e "${C2}[*] Identifying...${NC}"
         hashid -m -j "$secret"
-        echo -e "${C3}[Tip] Check if it's High Entropy (Encrypted) or Structured (Encoded).${NC}"
+        echo -e "${C3}[Tip] Check entropy: High (Encryption/Compressed) vs Low (Encoded/Plain).${NC}"
         ;;
-    2) ./modules/crypto/classical_ciphers.sh ;;
-    3) ./modules/crypto/symmetric_attacks.sh ;;
-    4) ./modules/crypto/public_key_rsa.sh ;;
-    5) ./modules/crypto/hash_cracking.sh ;;
-    6) ./modules/crypto/malware_recon.sh ;;
-    7) ./modules/crypto/misc_crypto.sh ;;
-    0) return ;;
-    *) echo -e "${C2}[!] Invalid option.${NC}" ; sleep 1 ; ./modules/crypto.sh ;;
+    2)
+        # Handles legacy ciphers and multi-layer encodings
+        ./modules/crypto/classical_ciphers.sh 
+        ;;
+    3)
+        # Block cipher modes (ECB/CBC/GCM) and Stream cipher (RC4/XOR) attacks
+        ./modules/crypto/symmetric_attacks.sh 
+        ;;
+    4)
+        # Factorization, Coppersmith, LLL, and Discrete Logarithm problems
+        ./modules/crypto/public_key_rsa.sh 
+        ;;
+    5)
+        # Brute-force and Merkle-Damgard specific vulnerabilities
+        ./modules/crypto/hash_cracking.sh 
+        ;;
+    6)
+        # Heuristics for finding crypto constants and loops in binaries
+        ./modules/crypto/malware_recon.sh 
+        ;;
+    7)
+        # Rare cases: Bacon, Morse, Esolangs, and Secret Sharing
+        ./modules/crypto/misc_crypto.sh 
+        ;;
+    0) 
+        # Exit module
+        return 
+        ;;
+    *) 
+        echo -e "${C2}[!] Invalid option.${NC}" 
+        sleep 1 
+        ./modules/crypto.sh 
+        ;;
 esac
 
-# Revenire automată la meniul crypto după execuție
+# Recursive call to keep the user in the Crypto Menu after an action
 ./modules/crypto.sh
