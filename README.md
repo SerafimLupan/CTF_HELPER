@@ -1,4 +1,4 @@
-# CTF_HELPER 🚩 `v2.0.0`
+# CTF_HELPER 🚩 `v3.0.0`
 
 **A modular, HackTricks-inspired automation suite for CTF players and Pentesters.**
 
@@ -35,6 +35,13 @@
         │   ├── server_*.sh           # SSRF, XXE, SSTI, LFI/RFI, Deserialization, Smuggling
         │   ├── modern_*.sh           # WebSockets, gRPC, dApps, ReDoS, UUIDs
         │   └── methodology_*.sh      # Recon flow and PoC templates
+        ├── crypto/               # 🔑 CRYPTOGRAPHY SUITE (HackTricks aligned)
+        │   ├── classical_ciphers.sh   # Encodings & Substitution
+        │   ├── hash_cracking.sh       # John/Hashcat & HashPump
+        │   ├── symmetric_attacks.sh   # Padding Oracle & Bit-flipping
+        │   ├── public_key_rsa.sh      # RsaCtfTool & SageMath
+        │   ├── malware_recon.sh       # Constants & Binary patterns
+        │   └── misc_crypto.sh         # Esolangs & Shamir SSS
         ├── ai_security.sh            # AI Security: Focuses on LLM vulnerabilities, Prompt Injection, and Model Safety.
         ├── binary_exploit.sh         # Binary Exploitation: Tools for buffer overflows, ROP chains, and memory protection bypass.
         ├── blockchain.sh             # Blockchain: Smart contract auditing and interaction with EVM-based networks.
