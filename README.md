@@ -1,4 +1,4 @@
-# CTF_HELPER 🚩 `v3.0.0`
+# CTF_HELPER 🚩 `v4.0.0`
 
 **A modular, HackTricks-inspired automation suite for CTF players and Pentesters.**
 
@@ -9,7 +9,8 @@
 ---
 
 ## ✨ Features
-
+- **Advanced Crypto Toolkit:** Automates complex attacks like Padding Oracles, RSA factorization, and MD5/SHA Length Extensions.
+- **Deep Stego Forensics:** Forensics-first approach for extracting data from Images, Audio (FSK/DTMF), Documents, and "Invisible" Text.
 - **Massive Web Suite:** 50+ specialized attack vectors covering Server-Side, Client-Side, and Modern Web logic.
 - **HackTricks Integrated:** Every module follows step-by-step checklists from [HackTricks.xyz](https://book.hacktricks.xyz/).
 - **Native & Advanced Tools:** Combines built-in Linux commands (`strings`, `xxd`, `find`) with industry-standard tools (`nmap`, `gobuster`, `steghide`, `slither`).
@@ -27,21 +28,28 @@
     ├── LICENSE                   # MIT License
     ├── README.md                 # Documentation
     └── modules/                  # Specialized attack modules
-        ├── web/                  # 🌐 WEB VULNERABILITIES (50+ Vectors)
-        │   ├── auth_*.sh             # 2FA, JWT, OAuth, SAML, Login/Reset Bypass
-        │   ├── client_*.sh           # XSS, CSRF, CORS, PostMessage, Clickjacking
-        │   ├── injection_*.sh        # SQLi, NoSQL, Command, LDAP, XPath, Unicode
-        │   ├── logic_*.sh            # IDOR, Race Condition, Rate Limit, Price Tampering
-        │   ├── server_*.sh           # SSRF, XXE, SSTI, LFI/RFI, Deserialization, Smuggling
-        │   ├── modern_*.sh           # WebSockets, gRPC, dApps, ReDoS, UUIDs
-        │   └── methodology_*.sh      # Recon flow and PoC templates
         ├── crypto/               # 🔑 CRYPTOGRAPHY SUITE (HackTricks aligned)
-        │   ├── classical_ciphers.sh   # Encodings & Substitution
-        │   ├── hash_cracking.sh       # John/Hashcat & HashPump
-        │   ├── symmetric_attacks.sh   # Padding Oracle & Bit-flipping
-        │   ├── public_key_rsa.sh      # RsaCtfTool & SageMath
-        │   ├── malware_recon.sh       # Constants & Binary patterns
-        │   └── misc_crypto.sh         # Esolangs & Shamir SSS
+        │   ├── classical_ciphers.sh    # Encodings & Substitution
+        │   ├── hash_cracking.sh        # John/Hashcat & HashPump
+        │   ├── symmetric_attacks.sh    # Padding Oracle & Bit-flipping
+        │   ├── public_key_rsa.sh       # RsaCtfTool & SageMath
+        │   ├── malware_recon.sh        # Constants & Binary patterns
+        │   └── misc_crypto.sh          # Esolangs & Shamir SSS
+        ├── stego/                # 🔍 STEGANOGRAPHY SUITE (Forensics-First Approach)
+        │   ├── workflow.sh            # The Triage Brain
+        │   ├── images.sh              # Pixel & Chunk Analysis
+        │   ├── audio.sh               # Spectrogram & Tones
+        │   ├── documents.sh           # PDF & Office Analysis
+        │   ├── text.sh                # Unicode & Whitespace
+        │   └── malware_stego.sh       # Delivery & Markers
+        ├── web/                  # 🌐 WEB VULNERABILITIES (50+ Vectors)
+        │   ├── auth_*.sh               # 2FA, JWT, OAuth, SAML, Login/Reset Bypass
+        │   ├── client_*.sh             # XSS, CSRF, CORS, PostMessage, Clickjacking
+        │   ├── injection_*.sh          # SQLi, NoSQL, Command, LDAP, XPath, Unicode
+        │   ├── logic_*.sh              # IDOR, Race Condition, Rate Limit, Price Tampering
+        │   ├── server_*.sh             # SSRF, XXE, SSTI, LFI/RFI, Deserialization, Smuggling
+        │   ├── modern_*.sh             # WebSockets, gRPC, dApps, ReDoS, UUIDs
+        │   └── methodology_*.sh        # Recon flow and PoC templates
         ├── ai_security.sh            # AI Security: Focuses on LLM vulnerabilities, Prompt Injection, and Model Safety.
         ├── binary_exploit.sh         # Binary Exploitation: Tools for buffer overflows, ROP chains, and memory protection bypass.
         ├── blockchain.sh             # Blockchain: Smart contract auditing and interaction with EVM-based networks.
