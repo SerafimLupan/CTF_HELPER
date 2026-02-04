@@ -1,51 +1,68 @@
 #!/bin/bash
-# --- CTF_HELPER Complete Requirements ---
-# Target: Full HackTricks Methodology support
+# CTF_HELPER Dependency Installer
+# Target OS: Kali Linux / Debian-based
 
-echo -e "\e[38;5;46m[+] Initializing full toolset installation...\e[0m"
+C1='\033[1;32m' # Green
+C2='\033[1;31m' # Red
+C3='\033[1;34m' # Blue
+NC='\033[0m'    # No Color
 
-# Update repositories
-sudo apt-get update -y
+echo -e "${C3}[*] Starting CTF_HELPER dependency installation...${NC}"
 
-# 1. Network Services & Recon (network-services-pentesting)
-NET=("nmap" "whois" "netcat-traditional" "snmp" "enum4linux" "smbclient" "ftp" "onesixtyone" "snmp-check")
+# Check for root
+if [[ $EUID -ne 0 ]]; then
+   echo -e "${C2}[!] This script must be run as root (sudo ./requirements.sh)${NC}"
+   exit 1
+fi
 
-# 2. Web Pentesting (pentesting-web)
-WEB=("curl" "wget" "gobuster" "nikto" "sqlmap" "dirb" "ffuf" "wfuzz")
+# 1. Update System
+echo -e "${C1}[+] Updating package lists...${NC}"
+apt-get update -y
 
-# 3. Binary Exploitation & Reversing (binary-exploitation / reversing)
-BIN=("gdb" "gcc" "strace" "ltrace" "radare2" "checksec" "ropper" "ghidra" "nasm")
+# 2. Install Core Apt Tools (The heavy hitters)
+echo -e "${C1}[+] Installing core security tools via apt...${NC}"
+apt-get install -y \
+    nmap \
+    gobuster \
+    ffuf \
+    sqlmap \
+    nikto \
+    commix \
+    steghide \
+    binwalk \
+    exiftool \
+    exploitdb \
+    john \
+    hashid \
+    curl \
+    wget \
+    git \
+    python3-pip \
+    jq \
+    libimage-exiftool-perl
 
-# 4. Steganography & File Analysis (stego / files)
-STEGO=("steghide" "exiftool" "binwalk" "outguess" "foremost" "pngcheck" "stegsolve")
+# 3. Web-Specific Advanced Tools (Python-based)
+echo -e "${C1}[+] Installing specialized web tools (Python)...${NC}"
+# Arjun (Parameter discovery)
+pip3 install arjun --break-system-packages
+# XSStrike (Advanced XSS)
+git clone https://github.com/s0md3v/XSStrike /opt/XSStrike
+pip3 install -r /opt/XSStrike/requirements.txt --break-system-packages
+# Tplmap (SSTI exploitation)
+git clone https://github.com/epinna/tplmap /opt/tplmap
+pip3 install -r /opt/tplmap/requirements.txt --break-system-packages
 
-# 5. Linux & Windows Hardening (linux-hardening / windows-hardening)
-HARDENING=("getcap" "binutils" "util-linux" "powershell-empire" "bloodhound" "impacket-scripts")
+# 4. Networking & PrivEsc Utilities
+echo -e "${C1}[+] Downloading Privilege Escalation scripts...${NC}"
+mkdir -p /opt/privesc
+wget https://github.com/peass-ng/PEASS-ng/releases/latest/download/linpeas.sh -O /opt/privesc/linpeas.sh
+wget https://github.com/peass-ng/PEASS-ng/releases/latest/download/winPEASany.exe -O /opt/privesc/winpeas.exe
+chmod +x /opt/privesc/linpeas.sh
 
-# 6. Crypto (crypto)
-CRYPTO=("python3-pip" "openssl" "fcrackzip" "john" "hashcat")
+# 5. Clean up
+echo -e "${C1}[+] Finalizing installation...${NC}"
+apt-get autoremove -y
 
-# 7. Mobile & Hardware (mobile-pentesting / hardware-physical-access)
-MOBILE=("adb" "fastboot" "apktool")
-
-# 8. Blockchain & AI (blockchain / AI)
-# Mostly handled via Python libraries
-AI_CLOUD=("awscli" "azure-cli")
-
-# Combine all lists
-ALL_TOOLS=("${NET[@]}" "${WEB[@]}" "${BIN[@]}" "${STEGO[@]}" "${HARDENING[@]}" "${CRYPTO[@]}" "${MOBILE[@]}" "${AI_CLOUD[@]}")
-
-for tool in "${ALL_TOOLS[@]}"; do
-    if ! command -v $tool &> /dev/null; then
-        echo -e "[!] Installing: $tool"
-        sudo apt-get install -y $tool
-    else
-        echo -e "[V] Already installed: $tool"
-    fi
-done
-
-# Python Specialized Libraries (HackTricks frequently uses these)
-echo -e "\e[38;5;46m[+] Installing Python libraries (requests, pwntools, etc.)...\e[0m"
-pip3 install requests pwntools pycryptodome scapy --break-system-packages 2>/dev/null
-
-echo -e "\e[38;5;82m[+] All categories from HackTricks are now supported by your local tools!\e[0m"
+echo -e "--------------------------------------------------"
+echo -e "${C1}[SUCCESS] CTF_HELPER is ready to engage!${NC}"
+echo -e "Usage: sudo ./ctf_helper.sh"
