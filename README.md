@@ -1,4 +1,4 @@
-# CTF_HELPER 🚩 `v4.0.0`
+# CTF_HELPER 🚩 `v5.0.0`
 
 **A modular, HackTricks-inspired automation suite for CTF players and Pentesters.**
 
@@ -10,6 +10,7 @@
 
 ## ✨ Features
 - **Advanced Crypto Toolkit:** Automates complex attacks like Padding Oracles, RSA factorization, and MD5/SHA Length Extensions.
+- **Comprehensive Network Orchestrator:** Scans 15+ specialized service categories and features a terminal-based PCAP engine for deep-packet forensics and credential carving.
 - **Deep Stego Forensics:** Forensics-first approach for extracting data from Images, Audio (FSK/DTMF), Documents, and "Invisible" Text.
 - **Massive Web Suite:** 50+ specialized attack vectors covering Server-Side, Client-Side, and Modern Web logic.
 - **HackTricks Integrated:** Every module follows step-by-step checklists from [HackTricks.xyz](https://book.hacktricks.xyz/).
@@ -35,13 +36,20 @@
         │   ├── public_key_rsa.sh       # RsaCtfTool & SageMath
         │   ├── malware_recon.sh        # Constants & Binary patterns
         │   └── misc_crypto.sh          # Esolangs & Shamir SSS
+        ├── network/              # 🔌 NETWORK SUITE (Specialized Sub-modules)
+        │   ├── common_services.sh      # Port 21, 22, 25, 53 (FTP, SSH, SMTP, DNS)
+        │   ├── db_services.sh          # Port 3306, 5432, 6379 (SQL & NoSQL Databases)
+        │   ├── win_services.sh         # Port 88, 135, 445 (Active Directory, SMB, RPC, LDAP)
+        │   ├── infra_services.sh       # Port 69, 123, 161 (TFTP, NTP, SNMP, VPN)
+        │   ├── modern_services.sh      # Port 2375, 5000, 6443 (Docker, K8s, Cloud APIs)
+        │   └── pcap_analyzer.sh        # Network Forensics (Tshark, Carving, Stream Analysis)        
         ├── stego/                # 🔍 STEGANOGRAPHY SUITE (Forensics-First Approach)
-        │   ├── workflow.sh            # The Triage Brain
-        │   ├── images.sh              # Pixel & Chunk Analysis
-        │   ├── audio.sh               # Spectrogram & Tones
-        │   ├── documents.sh           # PDF & Office Analysis
-        │   ├── text.sh                # Unicode & Whitespace
-        │   └── malware_stego.sh       # Delivery & Markers
+        │   ├── workflow.sh             # The Triage Brain
+        │   ├── images.sh               # Pixel & Chunk Analysis
+        │   ├── audio.sh                # Spectrogram & Tones
+        │   ├── documents.sh            # PDF & Office Analysis
+        │   ├── text.sh                 # Unicode & Whitespace
+        │   └── malware_stego.sh        # Delivery & Markers
         ├── web/                  # 🌐 WEB VULNERABILITIES (50+ Vectors)
         │   ├── auth_*.sh               # 2FA, JWT, OAuth, SAML, Login/Reset Bypass
         │   ├── client_*.sh             # XSS, CSRF, CORS, PostMessage, Clickjacking
