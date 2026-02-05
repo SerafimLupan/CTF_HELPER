@@ -29,10 +29,15 @@ print_banner() {
 # This looks for any .sh file in /modules and loads it
 if [ -d "./modules" ]; then
     for module in ./modules/*.sh; do
-        source "$module"
+        # Verificăm dacă este un fișier regular și avem drept de citire
+        if [ -f "$module" ] && [ -r "$module" ]; then
+            source "$module"
+        fi
     done
+else
+    echo -e "${C1}[!] Error: /modules directory not found.${NC}"
+    exit 1
 fi
-
 # --- Main Menu ---
 while true; do
     print_banner
