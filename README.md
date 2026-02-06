@@ -94,7 +94,7 @@ Developed and tested on Kali Linux. Ensure you have the necessary permissions to
     cd CTF_HELPER
 2. Make scripts executable:
    ```bash
-    chmod +x ctf_helper.sh requirements.sh modules/*.sh
+    chmod +x ctf_helper.sh requirements.sh modules/*.sh modules/crypto/*.sh modules/network/*.sh modules/stego/*.sh modules/web/*.sh
 3. Install dependencies:
    ```bash
    sudo ./requirements.sh
