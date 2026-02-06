@@ -81,4 +81,4 @@ apt-get autoremove -y
 
 echo -e "--------------------------------------------------"
 echo -e "${C1}[SUCCESS] CTF_HELPER Suite is fully equipped!${NC}"
-echo -e "${C5}Ready for CyberEDU, ROCSC, and UNbreakable!${NC}"
+echo -e "${C5}Ready for CTFs copmetitions!${NC}"
