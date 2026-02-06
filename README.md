@@ -71,9 +71,9 @@
         ├── misc.sh                   # 🎲 Miscellaneous: Esoteric languages (Brainfuck), Archive cracking, and PyJail escapes.
         ├── mobile_pentest.sh         # Mobile Pentest: Android APK and iOS IPA static and dynamic analysis.
         ├── network_services.sh       # Network Services: Protocol-specific enumeration (SMB, FTP, SNMP, etc.).
-        ├── osint.sh                  # 📡 OSINT: Social Media Recon (Sherlock), GEOINT (Google Maps/Exif), and Metadata extraction.
-        ├── pwn.sh                    # 🧬 Pwn: Exploit automation, cyclic patterns, and Pwntools template generation.
-        ├── reversing.sh              # 🔍 Reversing: Advanced binary triage, Radare2 integration, and execution tracing.
+        ├── osint.sh                  # 📡 OSINT: Digital footprinting, Sherlock integration, and GEOINT/Metadata analysis.
+        ├── pwn.sh                   # 🧬 Pwn: Binary exploitation assistant with Pwntools templates and ROP gadget search.
+        ├── reversing.sh              # 🔍 Reversing: Static & Dynamic triage using Radare2, ltrace, and automated header analysis.
         ├── stego.sh                  # Steganography: Finding hidden data in images, audio, and video files.
         ├── web_pentest.sh            # Web Pentest: Fuzzing, CMS identification, and web vulnerability scanning.
         └── windows_hardening.sh      # Windows Hardening: Local PrivEsc vectors and Active Directory enumeration.
