@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [[ -n "$CTF_HELPER_LOADED" ]]; then
+    return
+fi
+export CTF_HELPER_LOADED=1
+
 # --- Color Codes (Matrix Green Palette) ---
 C1="\e[38;5;22m"  # Darkest
 C2="\e[38;5;28m"
