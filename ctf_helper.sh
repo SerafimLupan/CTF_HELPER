@@ -41,13 +41,15 @@ fi
 # --- Main Menu ---
 while true; do
     print_banner
-    echo -e "${C6} 1)${NC} 🌐 Pentesting Web             ${C6} 8)${NC} 🖼️  Stego"
-    echo -e "${C6} 2)${NC} 🔌 Network Services          ${C6} 9)${NC} 🧬 Binary Exploitation"
-    echo -e "${C6} 3)${NC} 🛡️  Linux Hardening           ${C6}10)${NC} 🏁 Windows Hardening"
-    echo -e "${C6} 4)${NC} 🔍 Reversing                 ${C6}11)${NC} 📱 Mobile Pentesting"
-    echo -e "${C6} 5)${NC} 🔐 Crypto                    ${C6}12)${NC} 🤖 AI Security"
-    echo -e "${C6} 6)${NC} ⛓️  Blockchain               ${C6}13)${NC} ⚙️  Generic Methodologies"
-    echo -e "${C6} 7)${NC} 📂 File Analyzer             ${C6} 0)${NC} ❌ Exit"
+    echo -e "${C6} 1)${NC} 🌐 Pentesting Web            ${C6} 10)${NC} 🎲 Miscellaneous"
+    echo -e "${C6} 2)${NC} 🔌 Network Services          ${C6} 11)${NC} 🧬 Binary Exploitation"
+    echo -e "${C6} 3)${NC} 🛡️ Linux Hardening           ${C6} 12)${NC} 🏁 Windows Hardening"
+    echo -e "${C6} 4)${NC} 🔍 Reversing                 ${C6} 13)${NC} 📱 Mobile Pentesting"
+    echo -e "${C6} 5)${NC} 🔐 Crypto                    ${C6} 14)${NC} 🤖 AI Security"
+    echo -e "${C6} 6)${NC} ⛓️ Blockchain                ${C6} 15)${NC} ⚙️ Generic Methodologies"
+    echo -e "${C6} 7)${NC} 📂 File Analyzer             ${C6} 16)${NC} 🕵️ Forensics"
+    echo -e "${C6} 8)${NC} 🖼️ Stego                     ${C6} 17)${NC} 🧬 Pwn"
+    echo -e "${C6} 9)${NC} 📡 OSINT                     ${C6}  0)${NC} ❌ Exit"
 
     echo -ne "\n${C5}Select a category to explore: ${NC}"
     read opt
@@ -60,13 +62,17 @@ while true; do
         5) run_crypto ;;
         6) run_blockchain ;;
         7) run_file_analyzer ;;
+        9) run_osint ;;
         8) run_stego ;;
-        9) run_binary_exploit ;;
-        10) run_windows_hardening ;;
-        11) run_mobile_pentest ;;
-        12) run_ai_security ;;
-        13) run_generic_methodologies ;;
-        0) echo -e "${C6}Exiting. Happy Hacking!${NC}"; exit 0 ;;
+        10) run_misc ;;
+        11) run_binary_exploit ;;
+        12) run_windows_hardening ;;
+        13) run_mobile_pentest ;;
+        14) run_ai_security ;;
+        15) run_generic_methodologies ;;
+        16) run_forensics ;;
+        17) run _ ;;
+        0) echo -e "${C6}Exiting. Happy Hacking! ;)${NC}"; exit 0 ;;
         *) echo -e "${C1}Category logic not yet implemented.${NC}"; sleep 1 ;;
     esac
 done
