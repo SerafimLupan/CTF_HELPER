@@ -76,7 +76,7 @@ while true; do
         14) run_ai_security ;;
         15) run_generic_methodologies ;;
         16) run_forensics ;;
-        17) run _ ;;
+        17) run_pwn ;;
         0) echo -e "${C6}Exiting. Happy Hacking! ;)${NC}"; exit 0 ;;
         *) echo -e "${C1}Category logic not yet implemented.${NC}"; sleep 1 ;;
     esac
