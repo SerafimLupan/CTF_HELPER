@@ -84,7 +84,7 @@ Developed and tested on Kali Linux. Ensure you have the necessary permissions to
 
 1. Clone the repository:
    ```bahs 
-    git clone [https://github.com/SerafimLupan/CTF_HELPER.git](https://github.com/SerafimLupan/CTF_HELPER.git)
+    git clone https://github.com/SerafimLupan/CTF_HELPER.git
     cd CTF_HELPER
 2. Make scripts executable:
    ```bash
