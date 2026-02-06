@@ -1,4 +1,4 @@
-# CTF_HELPER 🚩 `v5.0.0`
+# CTF_HELPER 🚩 `v6.0.0`
 
 **A modular, HackTricks-inspired automation suite for CTF players and Pentesters.**
 
@@ -12,7 +12,9 @@
 - **Advanced Crypto Toolkit:** Automates complex attacks like Padding Oracles, RSA factorization, and MD5/SHA Length Extensions.
 - **Comprehensive Network Orchestrator:** Scans 15+ specialized service categories and features a terminal-based PCAP engine for deep-packet forensics and credential carving.
 - **Deep Stego Forensics:** Forensics-first approach for extracting data from Images, Audio (FSK/DTMF), Documents, and "Invisible" Text.
+- **Elite Forensics & RAM Analysis:** Integrated Volatility 3 engine for memory forensics and automated magic-byte repair.
 - **Massive Web Suite:** 50+ specialized attack vectors covering Server-Side, Client-Side, and Modern Web logic.
+- **Modern Reversing & Pwn Suite:** Automated triage for ELF/EXE binaries, ROP gadget searching, and Pwntools template generation.
 - **HackTricks Integrated:** Every module follows step-by-step checklists from [HackTricks.xyz](https://book.hacktricks.xyz/).
 - **Native & Advanced Tools:** Combines built-in Linux commands (`strings`, `xxd`, `find`) with industry-standard tools (`nmap`, `gobuster`, `steghide`, `slither`).
 - **Matrix-style UI:** A clean, green-themed interface with a custom ASCII banner.
@@ -42,7 +44,7 @@
         │   ├── win_services.sh         # Port 88, 135, 445 (Active Directory, SMB, RPC, LDAP)
         │   ├── infra_services.sh       # Port 69, 123, 161 (TFTP, NTP, SNMP, VPN)
         │   ├── modern_services.sh      # Port 2375, 5000, 6443 (Docker, K8s, Cloud APIs)
-        │   └── pcap_analyzer.sh        # Network Forensics (Tshark, Carving, Stream Analysis)        
+        │   └── pcap_analyzer.sh        # Network Forensics (Tshark, Carving, Stream Analysis)
         ├── stego/                # 🔍 STEGANOGRAPHY SUITE (Forensics-First Approach)
         │   ├── workflow.sh             # The Triage Brain
         │   ├── images.sh               # Pixel & Chunk Analysis
@@ -63,11 +65,15 @@
         ├── blockchain.sh             # Blockchain: Smart contract auditing and interaction with EVM-based networks.
         ├── crypto.sh                 # Cryptography: Hash identification, cracking, and common cipher decryption.
         ├── file_analyzer.sh          # File Analyzer: Deep inspection of file signatures, magic bytes, and metadata.
+        ├── forensics.sh              # 🕵️ Forensics: RAM analysis (Volatility 3), Magic Bytes repair, and deep file carving.
         ├── generic_methodologies.sh  # Generic Methodologies: OSINT, Cloud (AWS/Azure) basics, and general CTF strategy.
         ├── linux_hardening.sh        # Linux Hardening: Local enumeration for Privilege Escalation (SUID, Caps, Cron).
+        ├── misc.sh                   # 🎲 Miscellaneous: Esoteric languages (Brainfuck), Archive cracking, and PyJail escapes.
         ├── mobile_pentest.sh         # Mobile Pentest: Android APK and iOS IPA static and dynamic analysis.
         ├── network_services.sh       # Network Services: Protocol-specific enumeration (SMB, FTP, SNMP, etc.).
-        ├── reversing.sh              # Reversing: Static and dynamic analysis of binaries (ELF/EXE).
+        ├── osint.sh                  # 📡 OSINT: Social Media Recon (Sherlock), GEOINT (Google Maps/Exif), and Metadata extraction.
+        ├── pwn.sh                    # 🧬 Pwn: Exploit automation, cyclic patterns, and Pwntools template generation.
+        ├── reversing.sh              # 🔍 Reversing: Advanced binary triage, Radare2 integration, and execution tracing.
         ├── stego.sh                  # Steganography: Finding hidden data in images, audio, and video files.
         ├── web_pentest.sh            # Web Pentest: Fuzzing, CMS identification, and web vulnerability scanning.
         └── windows_hardening.sh      # Windows Hardening: Local PrivEsc vectors and Active Directory enumeration.
@@ -102,11 +108,8 @@ Developed and tested on Kali Linux. Ensure you have the necessary permissions to
 
 | Module | Description | Key Tools |
 | :--- | :--- | :--- |
-| **🌐 Web Pentest** | Fuzzing, CMS detection, and Header analysis. | `gobuster`, `nikto`, `curl` |
-| **🔌 Network** | Enumeration for SMB, FTP, SNMP, and SMTP. | `enum4linux`, `nmap`, `onesixtyone` |
 | **🛡️ Linux Hardening** | SUID, Capabilities, and Cronjob discovery. | `find`, `getcap`, `crontab` |
 | **🔍 Reversing** | Static analysis and binary tracing. | `readelf`, `ltrace`, `radare2` |
-| **🔐 Crypto** | Hash identification and brute-forcing. | `john`, `hash-identifier` |
 | **⛓️ Blockchain** | Smart contract analysis (EVM). | `slither`, `curl (JSON-RPC)` |
 | **📂 File Analyzer** | Deep file inspection and magic bytes. | `binwalk`, `exiftool`, `xxd` |
 | **🖼️ Stego** | LSB analysis and hidden data extraction. | `steghide`, `zsteg`, `stegsolve` |
@@ -115,6 +118,14 @@ Developed and tested on Kali Linux. Ensure you have the necessary permissions to
 | **📱 Mobile Pentesting** | APK/IPA decompilation and analysis. | `apktool`, `dex2jar`, `adb` |
 | **🤖 AI Security** | Prompt injection and LLM vulnerability checks. | `strings`, `jailbreak-templates` |
 | **⚙️ Generic Methodologies** | OSINT, Cloud, and Container breakout. | `docker`, `cloud-checklists` |
+| **🕵️ Forensics** | Memory Analysis & Header Repair. | `volatility3`, `hexeditor`, `binwalk` |
+| **🧬 Pwn** | Exploit automation & Mitigation check. |	`pwntools`, `checksec`, `ropper` |
+| **🔍 Reversing** | Dynamic tracing & Disassembly. | `radare2`, `ltrace`, `strace`, `upx` |
+| **🌐 Web Pentest** | Massive injection & Auth suite. | `sqlmap`, `gobuster`, `jwt-tool` |
+| **🔐 Crypto** | RSA, Hashes, and Classical Ciphers. |	`RsaCtfTool`, `john`, `hashcat` |
+| **📡 OSINT** | Social media & Metadata recon. | `sherlock`, `exiftool`, `whois` |
+| **🔌 Network** | Deep PCAP analysis & Service enum. |	`tshark`, `nmap`, `enum4linux` |
+| **🎲 Misc** |	Esoteric langs & Archive cracking. | `beef`, `fcrackzip`, `brainfuck` |
 
 ---
 
