@@ -61,7 +61,7 @@ while true; do
 
     case $opt in
         1) run_web_pentest ;;
-        2) run_network_services ;;
+        2) run_network_main ;;
         3) run_linux_hardening ;;
         4) run_reversing ;;
         5) run_crypto ;;
