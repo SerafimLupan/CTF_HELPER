@@ -31,10 +31,9 @@ print_banner() {
 }
 
 # --- Import All Modules Dynamically ---
-# This looks for any .sh file in /modules and loads it
+shopt -s nullglob  
 if [ -d "./modules" ]; then
     for module in ./modules/*.sh; do
-        # Verificăm dacă este un fișier regular și avem drept de citire
         if [ -f "$module" ] && [ -r "$module" ]; then
             source "$module"
         fi
