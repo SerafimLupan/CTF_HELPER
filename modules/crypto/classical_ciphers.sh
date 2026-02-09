@@ -2,8 +2,6 @@
 # CTF_HELPER - Classical Ciphers & Encodings
 # Focus: Layered transforms, Substitution, and Esoteric Encodings
 
-source ./ctf_helper.sh
-
 echo -e "${C6}[MODULE: CLASSICAL CIPHERS]${NC}"
 echo -e "Handling layered transforms (Encoding -> Substitution -> Compression)\n"
 
@@ -16,7 +14,7 @@ echo "6) CyberChef Magic Mode (External API)"
 echo "0) Back to Crypto Menu"
 
 echo -en "\n${C3}classical_helper > ${NC}"
-read class_opt
+read -r class_opt
 
 case $class_opt in
     1)
