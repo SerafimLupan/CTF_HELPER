@@ -2,7 +2,6 @@
 # CTF_HELPER - Steganography Module v2.0
 # Based on HackTricks Stego Methodology
 
-source ./ctf_helper.sh
 
 echo -e "${C6}
  ██████╗████████╗███████╗ ██████╗  ██████╗ 
