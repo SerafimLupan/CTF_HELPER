@@ -56,7 +56,7 @@ while true; do
     echo -e "${C6} 9)${NC} 📡 OSINT                     ${C6}  0)${NC} ❌ Exit"
 
     echo -ne "\n${C5}Select a category to explore: ${NC}"
-    read opt
+    read -r opt
 
     case $opt in
         1) run_web_pentest ;;
