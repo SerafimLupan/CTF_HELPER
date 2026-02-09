@@ -1,8 +1,6 @@
 #!/bin/bash
 # CTF_HELPER - Network Master Orchestrator
 
-source ./ctf_helper.sh
-
 function run_network_main() {
     print_banner
     echo -e "${C6}[NETWORK SERVICES PENTESTING]${NC}"
