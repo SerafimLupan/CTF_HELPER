@@ -2,58 +2,76 @@
 # CTF_HELPER - OSINT & Intelligence Module
 
 run_osint() {
-    print_banner
-    echo -e "${C6}[CATEGORY: OSINT & RECONNAISSANCE]${NC}"
-    
-    echo -e "\n${C4}Select OSINT Task:${NC}"
-    echo "1) 👤 User Recon (Sherlock - Social Media search)"
-    echo "2) 🌍 GEOINT (Image Metadata & Location Triage)"
-    echo "3) 🌐 Website Recon (Whois, DNS, Subdomains)"
-    echo "4) 📧 Email & Breach Lookups (Leaked data tools)"
-    echo "5) 🖼️  Google Dorking Templates (Quick Copy-Paste)"
-    echo "0) ↩️  Back"
+    # Folosim o buclă while în loc să re-apelăm funcția
+    while true; do
+        print_banner
+        echo -e "${C6}[CATEGORY: OSINT & RECONNAISSANCE]${NC}"
+        
+        echo -e "\n${C4}Select OSINT Task:${NC}"
+        echo "1) 👤 User Recon (Sherlock)"
+        echo "2) 🌍 GEOINT (Exiftool)"
+        echo "3) 🌐 Website Recon (DNS/Whois)"
+        echo "4) 📧 Email & Breach Lookups"
+        echo "5) 🖼️  Google Dorking Templates"
+        echo "0) ↩️  Back"
 
-    echo -ne "\n${C5}osint > ${NC}"
-    read oopt
+        echo -ne "\n${C5}osint > ${NC}"
+        read -r oopt
 
-    case $oopt in
-        1) # Sherlock
-            read -p "🔍 Enter target username: " target
-            echo -e "${C2}[*] Searching across 300+ platforms...${NC}"
-            sherlock "$target" --timeout 5
-            ;;
-            
-        2) # GEOINT
-            read -p "📂 Path to image: " img_path
-            echo -e "${C2}[*] Extracting Coordinates & Camera Info...${NC}"
-            exiftool "$img_path" | grep -iE "GPS|Location|Make|Model|Create Date"
-            echo -e "${C3}\n[TIP] Copy GPS coordinates to: https://www.google.com/maps${NC}"
-            ;;
+        case "$oopt" in
+            1)
+                read -p "🔍 Enter target username: " username
+                if [ -z "$username" ]; then
+                    echo -e "${C1}[!] No username entered.${NC}"
+                else
+                    echo -e "${C3}[*] Searching for accounts associated with: $username...${NC}"
+                    sherlock "$username" --timeout 5 --print-found
+                fi
+                ;;
+                
+            2)
+                read -e -p "📂 Path to image: " img_path # -e permite TAB-completion
+                if [ -f "$img_path" ]; then
+                    echo -e "${C2}[*] Extracting Info...${NC}"
+                    exiftool "$img_path" | grep -iE "GPS|Location|Make|Model|Create Date"
+                    echo -e "${C3}\n[TIP] Check GPS on Google Maps manually if found.${NC}"
+                else
+                    echo -e "${C1}[!] File not found.${NC}"
+                fi
+                ;;
 
-        3) # Domain Recon
-            read -p "🌐 Enter domain (ex: target.com): " domain
-            echo -e "${C2}[*] DNS Records:${NC}"
-            dig +short "$domain" ANY
-            echo -e "${C2}[*] Whois Info:${NC}"
-            whois "$domain" | grep -iE "Registrant|Admin|Organization|Email"
-            ;;
+            3)
+                read -p "🌐 Enter domain (ex: target.com): " domain
+                [ -z "$domain" ] && continue
+                echo -e "${C2}[*] DNS Records:${NC}"
+                dig +short "$domain" ANY
+                echo -e "${C2}\n[*] Whois Info:${NC}"
+                whois "$domain" | grep -iE "Registrant|Admin|Organization|Email"
+                ;;
 
-        4) # Breach search
-            read -p "📧 Enter email/domain: " email
-            echo -e "${C3}[*] Check manually on:${NC}"
-            echo "- https://haveibeenpwned.com"
-            echo "- https://intelx.io"
-            ;;
+            4)
+                read -p "📧 Enter email/domain: " email
+                echo -e "${C3}[*] Check manually on:${NC}"
+                echo "- https://haveibeenpwned.com"
+                echo "- https://intelx.io"
+                ;;
 
-        5) # Google Dorks
-            echo -e "${C2}[*] Useful Dorks for CTF:${NC}"
-            echo -e "${C4}site:target.com filetype:pdf \"confidential\"${NC}"
-            echo -e "${C4}site:target.com intitle:\"index of /\"${NC}"
-            echo -e "${C4}inurl:\"/phpinfo.php\"${NC}"
-            ;;
+            5)
+                echo -e "${C2}[*] Useful Dorks for CTF:${NC}"
+                echo -e "${C4}site:target.com filetype:pdf \"confidential\"${NC}"
+                echo -e "${C4}site:target.com intitle:\"index of /\"${NC}"
+                echo -e "${C4}inurl:\"/phpinfo.php\"${NC}"
+                ;;
 
-        0) return ;;
-    esac
-    read -p "Press Enter to continue..."
-    run_osint
+            0) 
+                return # Ieșire curată în meniul principal
+                ;;
+            *)
+                echo -e "${C1}[!] Invalid option.${NC}"
+                ;;
+        esac
+
+        echo -e "\n${C2}--------------------------------------------------${NC}"
+        read -p "Press Enter to continue..."
+    done
 }
