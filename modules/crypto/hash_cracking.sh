@@ -13,9 +13,9 @@ echo "5) Online Lookup (CrackStation/MD5Decrypt)"
 echo "0) Back to Crypto Menu"
 
 echo -en "\n${C3}hash_helper > ${NC}"
-read hash_opt
+read -r hash_opt
 
-case -r $hash_opt in
+case $hash_opt in
     1)
         # HackTricks: "Identify the hash first"
         read -p "Enter hash string: " h_str
