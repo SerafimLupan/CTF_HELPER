@@ -2,8 +2,6 @@
 # CTF_HELPER - Hash Cracking & Logic Attacks
 # Focus: Brute-force automation and Length Extension Attacks
 
-source ./ctf_helper.sh
-
 echo -e "${C6}[MODULE: HASHES & CRACKING]${NC}"
 echo -e "Automating identification, brute-force, and extension attacks\n"
 
@@ -17,7 +15,7 @@ echo "0) Back to Crypto Menu"
 echo -en "\n${C3}hash_helper > ${NC}"
 read hash_opt
 
-case $hash_opt in
+case -r $hash_opt in
     1)
         # HackTricks: "Identify the hash first"
         read -p "Enter hash string: " h_str
