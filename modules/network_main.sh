@@ -15,14 +15,14 @@ function run_network_main() {
     echo -ne "\n${C5}Category Selection: ${NC}"
     read nopt
 
-    case $nopt in
-        1) ./modules/network/common_services.sh ;;
-        2) ./modules/network/db_services.sh ;;
-        3) ./modules/network/win_services.sh ;;
-        4) ./modules/network/infra_services.sh ;;
-        5) ./modules/network/modern_services.sh ;;
-        6) ./modules/network/pcap_analyzer.sh ;; 
-        0) return ;;
-    esac
+    case $nopt in
+        1) source ./modules/network/common_services.sh; run_common_services ;;
+        2) source ./modules/network/db_services.sh; run_db_services ;;
+        3) source ./modules/network/win_services.sh; run_win_services ;;
+        4) source ./modules/network/infra_services.sh; run_infra_services ;;
+        5) source ./modules/network/modern_services.sh; run_modern_services ;;
+        6) source ./modules/network/pcap_analyzer.sh; run_pcap_analyzer ;;
+        0) return ;;
+        *) echo -e "${C1}Invalid option.${NC}"; sleep 1 ;;
+    esac
 }
-run_network_main
