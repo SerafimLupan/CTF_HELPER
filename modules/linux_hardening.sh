@@ -6,50 +6,57 @@ function run_linux_hardening() {
     echo -e "${C6}[LINUX HARDENING & PRIVESC MODULE]${NC}"
     echo -e "Based on: https://book.hacktricks.xyz/linux-hardening/privilege-escalation"
     echo -e "----------------------------------------------------------------------------"
-    echo -e "1) 🔑  SUID Binaries (Căutare vectori GTFOBins)"
-    echo -e "2) 🛠️   Capabilities (Căutare getcap)"
-    echo -e "3) 📝  Writable Files/Dirs (Check for misconfigurations)"
-    echo -e "4) 🕵️   Cron Jobs (Sarcini programate & scripturi)"
-    echo -e "5) 💾  Sudo Rights (sudo -l)"
-    echo -e "6) 📂  Sensitive Files (Shadow, Backup, SSH keys)"
-    echo -e "0) ↩️   Return to Main Menu"
+    echo -e "1) OS info"
+    echo -e "2) Path"
+    echo -e "3) Env info"
+    echo -e "4) Kernel exploits"
+    echo -e "5) CVE-2016-5195 (DirtyCow)"
+    echo -e "6) Sudo version"
+    echo -e "7) More system enumeration"
+    echo -e "0) Return to Main Menu"
 
     echo -ne "\n${C5}Hardening Selection: ${NC}"
     read lopt
 
     case $lopt in
         1)
-            echo -e "\n[*] Searching for SUID binaries..."
-            find / -perm -u=s -type f 2>/dev/null | grep -v "Permission denied"
-            echo -e "\n${C4}Tip:${NC} Cross-reference found binaries with https://gtfobins.github.io/"
+            echo -e "\n[*] OS info..."
+            (cat /proc/version || uname -a ) 2>/dev/null
+            lsb_release -a 2>/dev/null # old, not by default on many systems
+            cat /etc/os-release 2>/dev/null # universal on modern systems
             ;;
         2)
-            echo -e "\n[*] Searching for Capabilities..."
-            getcap -r / 2>/dev/null
+            echo -e "\n[*] Path..."
+            echo $PATH
             ;;
         3)
-            echo -e "\n[*] Searching for world-writable files/directories..."
-            find / -writable -type d 2>/dev/null | grep -v "proc"
-            echo -e "\n[*] Writable files (excluding sys/proc):"
-            find / -writable -type f 2>/dev/null | grep -vE "proc|sys"
+            echo -e "\n[*]  Env info..."
+            (env || set) 2>/dev/null
             ;;
         4)
-            echo -e "\n[*] Checking Cron Jobs..."
-            ls -la /etc/cron* 2>/dev/null
-            cat /etc/crontab 2>/dev/null
-            echo -e "\n[*] User Crontabs:"
-            for user in $(cut -f1 -d: /etc/passwd); do crontab -u $user -l 2>/dev/null; done
+            echo -e "\n[*] Check the kernel version and if there is some exploit that can be used to escalate privileges..."
+            cat /proc/version
+            uname -a
+            searchsploit "Linux Kernel"
             ;;
         5)
-            echo -e "\n[*] Checking current sudo privileges..."
-            sudo -l
+            echo -e "\n[*] Linux Privilege Escalation - Linux Kernel <= 3.19.0-73.8..."
+            # make dirtycow stable
+            echo 0 > /proc/sys/vm/dirty_writeback_centisecs
+            g++ -Wall -pedantic -O2 -std=c++11 -pthread -o dcow 40847.cpp -lutil https://github.com/dirtycow/dirtycow.github.io/wiki/PoCs https://github.com/evait-security/ClickNRoot/blob/master/1/exploit.c
             ;;
         6)
-            echo -e "\n[*] Checking for sensitive files..."
-            echo -ne "SSH Keys: "
-            find / -name "id_rsa" -o -name "authorized_keys" 2>/dev/null
-            echo -ne "Backups: "
-            find / -name "*.bak" -o -name "*.old" 2>/dev/null
+            echo -e "\n[*] Based on the vulnerable sudo versions that appear in..."
+            searchsploit sudo
+            echo -e "\n[*] You can check if the sudo version is vulnerable using this grep...."
+            sudo -V | grep "Sudo ver" | grep "1\.[01234567]\.[0-9]\+\|1\.8\.1[0-9]\*\|1\.8\.2[01234567]"
+            ;;
+        7) 
+            echo -r "\n[*] More system enumeration..."
+            date 2>/dev/null #Date
+            (df -h || lsblk) #System stats
+            lscpu #CPU info
+            lpstat -a 2>/dev/null #Printers info
             ;;
         0) return ;;
         *) echo -e "${C1}Invalid selection.${NC}" ; sleep 1 ;;
